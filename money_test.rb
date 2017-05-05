@@ -11,8 +11,16 @@ class MoneyTest < Minitest::Test
   end
 
   def test_addition
-    sum = Money.dollar(5) + Money.dollar(5)
     bank = Bank.new
+    sum = Money.dollar(5) + Money.dollar(5)
+    reduced = bank.reduce(sum, "USD")
+    assert_same Money.dollar(10), reduced
+  end
+
+  def test_mixed_addition
+    bank = Bank.new
+    bank.add_rate("CHF", "USD", 2)
+    sum = Money.dollar(5) + Money.franc(10)
     reduced = bank.reduce(sum, "USD")
     assert_same Money.dollar(10), reduced
   end

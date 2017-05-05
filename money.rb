@@ -23,8 +23,10 @@ class Sum
     @addend = addend
   end
 
-  def reduce(currency)
-    Money.new(@augend.amount + @addend.amount, currency)
+  def reduce(bank, currency)
+    ar = @augend.reduce(bank, currency)
+    ad = @addend.reduce(bank, currency)
+    Money.new(ar.amount + ad.amount, currency)
   end
 end
 
@@ -34,8 +36,6 @@ class Bank
   end
 
   def reduce(expr, currency)
-    return expr.reduce(currency) unless expr.class == Money
-
     expr.reduce(self, currency)
   end
 
