@@ -25,6 +25,14 @@ class MoneyTest < Minitest::Test
     assert_same Money.dollar(10), reduced
   end
 
+  def test_sum_times
+    bank = Bank.new
+    bank.add_rate("CHF", "USD", 2)
+    sum = Money.dollar(5) + Money.franc(10)
+    reduced = bank.reduce(sum.times(2), "USD")
+    assert_same Money.dollar(20), reduced
+  end
+
   def test_reduce_different_currency
     bank = Bank.new
     bank.add_rate("CHF", "USD", 2)

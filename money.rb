@@ -23,6 +23,10 @@ class Sum
     @addend = addend
   end
 
+  def times(multiplier)
+    Sum.new(@augend.times(multiplier), @addend.times(multiplier))
+  end
+
   def reduce(bank, currency)
     ar = @augend.reduce(bank, currency)
     ad = @addend.reduce(bank, currency)
