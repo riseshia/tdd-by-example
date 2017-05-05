@@ -1,4 +1,4 @@
-class Dollar
+class Money
   attr_reader :amount
 
   def initialize(amount)
@@ -10,6 +10,12 @@ class Dollar
   end
 
   def equal?(other)
-    amount == other.amount
+    self.class == other.class && amount == other.amount
   end
+end
+
+class Dollar < Money
+end
+
+class Franc < Money
 end
