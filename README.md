@@ -1,2 +1,3 @@
-# tdd-by-example
-Test-Driven Development: By Example
+# Test-Driven Development: By Example
+
+Ruby example
