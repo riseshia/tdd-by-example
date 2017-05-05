@@ -8,4 +8,8 @@ class Dollar
   def times(number)
     self.class.new(amount * number)
   end
+
+  def equal?(other)
+    amount == other.amount
+  end
 end
