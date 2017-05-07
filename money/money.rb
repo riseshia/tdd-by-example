@@ -36,7 +36,7 @@ end
 
 class Bank
   def initialize
-    @rate_table = {}
+    @rate_table = Hash.new(Hash.new({}))
   end
 
   def reduce(expr, currency)
@@ -44,8 +44,6 @@ class Bank
   end
 
   def add_rate(from_currency, to_currency, rate)
-    @rate_table[from_currency] = {} unless @rate_table[from_currency]
-    @rate_table[to_currency] = {} unless @rate_table[to_currency]
     @rate_table[from_currency][to_currency] = rate
   end
 
