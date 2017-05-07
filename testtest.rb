@@ -6,10 +6,6 @@ def assert(value)
   end
 end
 
-def refute(value)
-  assert not(value)
-end
-
 class TestTestCase
   def initialize(name)
     @name = name
