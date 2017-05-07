@@ -10,6 +10,7 @@ class WasRun < TestTestCase
   end
 
   def test_method
+    assert true
     @log += " test_method"
   end
 end
@@ -67,8 +68,15 @@ class TestTestCaseTest < TestTestCase
     test.run
     assert test.log == " teardown"
   end
+
+  def test_result
+    test = WasRun.new("test_method")
+    test.run
+    assert test.summary == "1 run, 0 failed"
+  end
 end
 
 TestTestCaseTest.new("test_running").run
 TestTestCaseTest.new("test_setup").run
 TestTestCaseTest.new("test_teardown").run
+TestTestCaseTest.new("test_result").run
