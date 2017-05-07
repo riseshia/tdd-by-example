@@ -4,7 +4,12 @@ class TestTestCase
   end
 
   def run
+    setup
     send(@name.to_sym)
+  end
+
+  # Template Method
+  def setup
   end
 end
 
