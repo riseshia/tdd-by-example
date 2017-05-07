@@ -1,3 +1,15 @@
+def assert(value)
+  if value
+    putc "."
+  else
+    "'#{value}' is refuted."
+  end
+end
+
+def refute(value)
+  assert not(value)
+end
+
 class TestTestCase
   def initialize(name)
     @name = name
@@ -10,18 +22,5 @@ class TestTestCase
 
   # Template Method
   def setup
-  end
-end
-
-class WasRun < TestTestCase
-  attr_reader :wasRun
-
-  def initialize(name)
-    @wasRun = nil
-    super
-  end
-
-  def test_method
-    @wasRun = true
   end
 end
