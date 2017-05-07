@@ -1,8 +1,8 @@
 def assert(value)
-  if value
+  if value == true
     putc "."
   else
-    "'#{value}' is refuted."
+    puts "'#{value}' is refuted."
   end
 end
 
@@ -14,9 +14,13 @@ class TestTestCase
   def run
     setup
     send(@name.to_sym)
+    teardown
   end
 
   # Template Method
   def setup
+  end
+
+  def teardown
   end
 end
