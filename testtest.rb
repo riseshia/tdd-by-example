@@ -25,6 +25,9 @@ class TestTestCase
   def run
     setup
     send(@name.to_sym)
+  rescue => e
+    @report.report(false)
+  ensure
     teardown
   end
 
