@@ -4,10 +4,6 @@ require_relative "testtest"
 class WasRun < TestTestCase
   attr_accessor :log
 
-  def setup
-    @log += "setup"
-  end
-
   def initialize(name)
     @log = ""
     super
@@ -18,9 +14,32 @@ class WasRun < TestTestCase
   end
 end
 
+class WasSetup < TestTestCase
+  attr_accessor :log
+
+  def setup
+    @log += "setup"
+  end
+
+  def initialize(name)
+    @log = ""
+    super
+  end
+
+  def test_method
+  end
+end
+
 class TestTestCaseTest < TestTestCase
   def test_running
     test = WasRun.new("test_method")
+    assert test.log == ""
+    test.run
+    assert test.log == "test_method"
+  end
+
+  def test_setup
+    test = WasSetup.new("test_method")
     assert test.log == ""
     test.run
     assert test.log == "setup test_method"
