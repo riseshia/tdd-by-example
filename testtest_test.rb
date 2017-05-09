@@ -98,7 +98,7 @@ class TestTestCaseTest < TestTestCase
   end
 
   def test_test_suite
-    suite = TestTestSuite.new
+    suite = TestTest.new
     suite.add(WasRun.new("test_method"))
     suite.add(WasBroken.new("test_method"))
     suite.run(@result)
@@ -106,7 +106,7 @@ class TestTestCaseTest < TestTestCase
   end
 end
 
-suite = TestTestSuite.new
+suite = TestTest.new
 suite.add(TestTestCaseTest.new("test_running"))
 suite.add(TestTestCaseTest.new("test_setup"))
 suite.add(TestTestCaseTest.new("test_teardown"))

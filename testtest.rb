@@ -14,7 +14,7 @@ class TestTestReport
   end
 end
 
-class TestTestSuite
+class TestTest
   def initialize
     @tests = []
   end
