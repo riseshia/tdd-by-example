@@ -88,13 +88,13 @@ class TestTestCaseTest < TestTestCase
   def test_result
     test = WasRun.new("test_method")
     test.run(@result)
-    assert test.summary == "1 run, 0 failed"
+    assert @result.summary == "1 run, 0 failed"
   end
 
   def test_broken_test
     test = WasBroken.new("test_method")
     test.run(@result)
-    assert test.summary == "1 run, 1 failed"
+    assert @result.summary == "1 run, 1 failed"
   end
 
   def test_test_suite

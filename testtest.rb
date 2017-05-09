@@ -33,15 +33,15 @@ class TestTestCase
 
   def initialize(name)
     @name = name
-    @report = nil
   end
 
   def run(report)
-    @report = report
+    report = report
     setup
     send(@name.to_sym)
+    report.report(true)
   rescue => e
-    @report.report(false)
+    report.report(false)
   ensure
     teardown
   end
@@ -49,15 +49,10 @@ class TestTestCase
   def assert(value)
     if value == true
       putc "."
-      @report.report(true)
     else
       puts "'#{value}' is refuted."
-      @report.report(false)
+      raise "Assertion Error"
     end
-  end
-
-  def summary
-    @report.summary
   end
 
   # Template Method
