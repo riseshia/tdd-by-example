@@ -60,42 +60,59 @@ class WasTeardown < TestTestCase
 end
 
 class TestTestCaseTest < TestTestCase
+  def setup
+    @result = TestTestReport.new
+  end
+
   def test_running
     test = WasRun.new("test_method")
     assert test.log == ""
-    test.run
+    test.run(@result)
     assert test.log == " test_method"
   end
 
   def test_setup
     test = WasSetup.new("test_method")
     assert test.log == ""
-    test.run
+    test.run(@result)
     assert test.log == "setup"
   end
 
   def test_teardown
     test = WasTeardown.new("test_method")
     assert test.log == ""
-    test.run
+    test.run(@result)
     assert test.log == " teardown"
   end
 
   def test_result
     test = WasRun.new("test_method")
-    test.run
+    test.run(@result)
     assert test.summary == "1 run, 0 failed"
   end
 
   def test_broken_test
     test = WasBroken.new("test_method")
-    test.run
+    test.run(@result)
     assert test.summary == "1 run, 1 failed"
+  end
+
+  def test_test_suite
+    suite = TestTestSuite.new
+    suite.add(WasRun.new("test_method"))
+    suite.add(WasBroken.new("test_method"))
+    suite.run(@result)
+    assert @result.summary == "2 run, 1 failed"
   end
 end
 
-TestTestCaseTest.new("test_running").run
-TestTestCaseTest.new("test_setup").run
-TestTestCaseTest.new("test_teardown").run
-TestTestCaseTest.new("test_result").run
-TestTestCaseTest.new("test_broken_test").run
+suite = TestTestSuite.new
+suite.add(TestTestCaseTest.new("test_running"))
+suite.add(TestTestCaseTest.new("test_setup"))
+suite.add(TestTestCaseTest.new("test_teardown"))
+suite.add(TestTestCaseTest.new("test_result"))
+suite.add(TestTestCaseTest.new("test_broken_test"))
+suite.add(TestTestCaseTest.new("test_test_suite"))
+result = TestTestReport.new
+suite.run(result)
+puts result.summary

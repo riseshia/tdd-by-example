@@ -14,15 +14,30 @@ class TestTestReport
   end
 end
 
+class TestTestSuite
+  def initialize
+    @tests = []
+  end
+
+  def add(test_case)
+    @tests << test_case
+  end
+
+  def run(report)
+    @tests.each { |test| test.run(report) }
+  end
+end
+
 class TestTestCase
   attr_reader :summary
 
   def initialize(name)
     @name = name
-    @report = TestTestReport.new
+    @report = nil
   end
 
-  def run
+  def run(report)
+    @report = report
     setup
     send(@name.to_sym)
   rescue => e
